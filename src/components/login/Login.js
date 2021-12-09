@@ -1,10 +1,49 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { auth, provider } from '../../firebase'
+import { useDispatch } from 'react-redux'
+import { login } from '../../features/userSlice'
+import { useHistory } from 'react-router-dom'
 const Login = () => {
+  const dispatch = useDispatch()
+  const history = useHistory()
+  useEffect(() => {
+    auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        dispatch(
+          login({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          })
+        )
+        history.push('/home')
+      } else {
+        history.push('/')
+      }
+    })
+  }, [])
+  const SignIn = () => {
+    auth
+      .signInWithPopup(provider)
+      .then((temp) => {
+        let user = temp.user
+        dispatch(
+          login({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL,
+          })
+        )
+        history.push('/home')
+      })
+
+      .catch((error) => error)
+  }
   return (
     <MainContainer>
       <FrPhoto>
-        <img src='/images/undraw-first-option.svg' />
+        <img alt='' src='/images/undraw-first-option.svg' />
       </FrPhoto>
       <SecPhoto>
         <img src='/images/undraw-sec-option.svg' alt='' />
@@ -13,12 +52,12 @@ const Login = () => {
         <img src='/images/linkedin-logo-login.svg' alt='' />
       </HeaderSection>
       <LoginSection>
-        <GoogleSec>
+        <GoogleSec onClick={SignIn}>
           <img src='/images/google-favicon-logo.png' alt='' />
           <span>Sign in with Google</span>
         </GoogleSec>
         <FacebookSec>
-          <img src='/images/facebook-icon.png' />
+          <img alt='' src='/images/facebook-icon.png' />
           <span>Sign in with Facebook</span>
         </FacebookSec>
       </LoginSection>

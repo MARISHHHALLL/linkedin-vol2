@@ -14,10 +14,10 @@ const TopLeftContent = () => {
           <span>Connections</span>
           <span>Grow your Network</span>
         </div>
-        <img src='/images/images/widget-icon.svg' />
+        <img alt='' src='/images/images/widget-icon.svg' />
       </ConnectionWidget>
       <Items>
-        <img src='/images/images/item-icon.svg' />
+        <img aly='' src='/images/images/item-icon.svg' />
         <span>My items</span>
       </Items>
     </MainConttent>
@@ -26,6 +26,7 @@ const TopLeftContent = () => {
 
 export default TopLeftContent
 const MainConttent = styled.div`
+  width: 100%;
   background: white;
   padding-bottom: 20px;
   border: none;
@@ -35,10 +36,7 @@ const MainConttent = styled.div`
   transition: all 250ms cubic-bezier(0.9, 0.4, 0.7, 0.2) 0s;
   display: flex;
   flex-direction: column;
-  @media (max-width: 768px) {
-    margin: 10px 0;
-    width: 90%;
-  }
+  margin: 0 0 20px 0;
 `
 const Background = styled.div`
   background: url('/images/images/card-bg.svg');
@@ -105,7 +103,7 @@ const ConnectionWidget = styled.div`
     }
   }
   img {
-    height: 22px;
+    height: 20px;
     object-fit: contain;
   }
 `
@@ -113,7 +111,7 @@ const Items = styled.div`
   display: flex;
   align-items: center;
   padding: 20px 0 0 20px;
-  gap: 10px;
+  gap: 5px;
   img {
     height: 20px;
   }

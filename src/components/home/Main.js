@@ -1,5 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import BottomLeftContent from './BottomLeftContent'
+import ContentOfRight from './ContentOfRight'
+import MidMain from './MidMain'
 import TopLeftContent from './TopLeftContent'
 const Main = () => {
   return (
@@ -16,8 +19,12 @@ const Main = () => {
           <TopLeftContent />
           <BottomLeftContent />
         </LeftContent>
-        <MidContent>main</MidContent>
-        <RightContent>right</RightContent>
+        <MidContent>
+          <MidMain />
+        </MidContent>
+        <RightContent>
+          <ContentOfRight />
+        </RightContent>
       </MainContent>
     </ContainerHome>
   )
@@ -28,6 +35,7 @@ const ContainerHome = styled.div`
   padding: 80px 0;
   width: 100%;
   height: calc(100vh - 65px);
+  overflow-y: scroll;
 `
 const TextHeader = styled.div`
   display: flex;
@@ -66,9 +74,27 @@ const MainContent = styled.div`
   }
 `
 const LeftContent = styled.div`
-  grid-area: left;
+  grid-area: 'left';
   width: 100%;
+  @media (max-width: 768px) {
+    margin: 10px 0;
+    width: 90%;
+  }
 `
 
-const MidContent = styled.div``
-const RightContent = styled.div``
+const MidContent = styled.div`
+  grid-area: 'mid';
+  width: 100%;
+  @media (max-width: 768px) {
+    margin: 10px 0;
+    width: 90%;
+  }
+`
+const RightContent = styled.div`
+  grid-area: 'right';
+  width: 100%;
+  @media (max-width: 768px) {
+    margin: 10px 0;
+    width: 90%;
+  }
+`
